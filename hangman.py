@@ -2,7 +2,7 @@ import random
 import string
 from words import words
 
-worded = ["the", "good", "thebad", "and" "the ugly"]
+
 
 def get_valid_word(words):
     word = random.choice(words) #randomly chooses something from the list
@@ -13,11 +13,12 @@ def get_valid_word(words):
 
 def hangman():
     word = get_valid_word(words)
-    print(word)
+    print(f"Your word is {word}")
     word_letters = set(word) #letters in the word
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # what the user has guessed
-
+     # Initialize an empty list to store the characters
+ 
      #getting user input
     while len(word_letters) > 0:
         # letters used
@@ -26,20 +27,24 @@ def hangman():
 
         # what current word is (ie W - R D)
         # word_list = [letter if letter in used_letters else '-' for letter in word]
-        word_list = []  # Initialize an empty list to store the characters
+        user_letter = input('Guess a letter: ').upper()
 
+
+        word_list = []
         for letter in word:
-            if letter in used_letters:
+            print(f"letter: {letter}")
+            if letter == user_letter.lower():                
                 word_list.append(letter)  # If the letter is in used_letters, add it to word_list
             else:
-                word_list.append('-')  # If the letter is not in used_letters, add '-' to word_list
+                word_list.append('-')
+                print("yam is good")  # If the letter is not in used_letters, add '-' to word_list
 
-        print('Current word: ', ' '.join(word_list), flush=True)
+        print('Current word: ', ' '.join(word_list))
         print(word_list)
         print(word_letters)
 
-        user_letter = input('Guess a letter: ').upper()
-        if user_letter in alphabet - used_letters:
+        
+        if user_letter in alphabet and user_letter not in used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
@@ -52,5 +57,6 @@ def hangman():
 
 
 hangman()
+
 
 
