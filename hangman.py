@@ -30,7 +30,10 @@ def hangman():
         print('You have used these letters:', ' '.join(used_letters))
 
         # what current word is (ie W - R D)
-        word_list = [letter if letter.upper() in used_letters else '-' for letter in word]
+
+        word_list = [letter if letter.upper() in used_letters else '-' for letter in word]    
+        print('Current word: ', ' '.join(word_list))
+        
         user_letter = input('Guess a letter: ').upper()
 
 
@@ -42,7 +45,7 @@ def hangman():
             #elif user_letter != used_letters:
                 #word_list.append('-')  # If the letter is not in used_letters, add '-' to word_list
 
-        print('Current word: ', ' '.join(word_list))
+        
         #print(word_list)
         #print(word_letters)
 
@@ -68,6 +71,7 @@ def hangman():
     else:
         print('You guessed the word', word,  '!!')     
 
+    
 
 hangman()
 
