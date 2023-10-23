@@ -66,6 +66,7 @@ def play(game, x_player, o_player, print_game=True):
             if game.current_winner:
                 if print_game:
                     print(letter + ' wins!')
+                return letter    
 
                         
 
@@ -74,4 +75,7 @@ def play(game, x_player, o_player, print_game=True):
             if letter == 'X':
                 letter = 'O'
             else:
-                letter = 'X'    
+                letter = 'X' 
+
+        if print_game:
+            print('It\'s a tie')
