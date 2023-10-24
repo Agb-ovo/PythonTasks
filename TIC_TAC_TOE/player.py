@@ -61,7 +61,7 @@ class GenuisComputerPlayer(Player):
         # this is our base case
         if state.current_winner == other_player:
             # we should return position AND score because we need to keep track of the score
-            # for minimax to work
+            # for minmax to work
             return {'position': None,
                     'score': 1 * (state.num_empty_squares() + 1) if other_player == max_player else -1 *(
                         state.num_empty_squares() + 1)
@@ -79,7 +79,7 @@ class GenuisComputerPlayer(Player):
             #step 1:  make a move, try that spot
             state.make_move(possible_move, player)
             #step 2: recurse using minmax to simulate a game after making that move
-            sim_score = self.minimax(state, other_player) # now we alternate players
+            sim_score = self.minmax(state, other_player) # now we alternate players
             #step 3: undo the move
             state.board[possible_move] = ' '
             state.current_winner = None
