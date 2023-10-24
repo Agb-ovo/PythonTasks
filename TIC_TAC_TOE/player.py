@@ -50,7 +50,7 @@ def get_move(self, game):
         square = random.choice(game.available_moves()) #randomly choose one
     else:
         #get the square based off the minmax algorithm
-        square = self.minmax(game, self.letter)
+        square = self.minmax(game, self.letter)['position']
     return square
 
 def minmax(self, state, player):
@@ -75,8 +75,27 @@ def minmax(self, state, player):
     else:
         best = {'position': None, 'score': math. inf} #each score should minimize    
 
-      
+    for possible_move in state.available_moves():
+        #step 1:  make a move, try that spot
+        state.make_move(possible_move, player)
+        #step 2: recurse using minmax to simulate a game after making that move
+        sim_score = self.minimax(state, other_player) # now we alternate players
+        #step 3: undo the move
+        state.board[possible_move] = ' '
+        state.current_winner = None
+        sim_score['position'] = possible_move # otherwise this will get messed up from the recursion
+        #step 4: update the dictionaries if necessary
+        if player == max_player:
+            if sim_score['score'] > best['score']:
+                best = sim_score # replace best
 
+            else:
+                if sim_score['score'] < best['score']:
+                    best = sim_score 
+
+        return best
+
+        
 
 
         
